@@ -1,0 +1,28 @@
+USE [MusicStreaming]
+GO
+
+/****** Object:  Table [dbo].[Song]    Script Date: 15-07-2022 00:02:53 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [dbo].[Song](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ArtistId] [int] NOT NULL,
+	[Name] [varchar](50) NOT NULL,
+ CONSTRAINT [PK_Song] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [dbo].[Song]  WITH CHECK ADD  CONSTRAINT [FK_Artist_Song] FOREIGN KEY([ArtistId])
+REFERENCES [dbo].[Artist] ([Id])
+GO
+
+ALTER TABLE [dbo].[Song] CHECK CONSTRAINT [FK_Artist_Song]
+GO
+

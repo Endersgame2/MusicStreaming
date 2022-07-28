@@ -1,0 +1,49 @@
+﻿@using MusicStreaming.Models.ViewModel
+@{
+    ViewData["Title"] = "User Page";
+}
+@model UserCollectionView
+
+<div class="row">
+    <div class="col-12">
+        <div class="form-group">
+            <label for="selectedUser">
+                Select User
+            </label>
+            <select id="selectedUser" class="form-control" onchange="loadCollection(this.value)">
+                <option value="">--Select--</option>
+                @foreach (var user in Model.Users)
+                {
+                    <option value="@user.Key">@user.Value</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Song</th>
+                    <th scope="col">Artist</th>
+                    <th scope="col">Collection</th>
+                </tr>
+            </thead>
+            <tbody>
+               @for (var i = 0; i < Model.UserCollectionItems.Count; i++)
+                {
+                     var item = Model.UserCollectionItems[i];
+                <tr>
+                    <th scope="row">@(i + 1)</th>
+                    <td>@item.SongName</td>
+                    <td>@item.ArtistName</td>
+                    <td>@item.ArtistName</td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/js/index.js"></script>

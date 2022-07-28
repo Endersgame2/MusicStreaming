@@ -1,0 +1,74 @@
+﻿@using MusicStreaming.Models.ViewModel
+@{
+    ViewData["Title"] = "Manage Funds";
+}
+@model BalanceView
+@if(!string.IsNullOrEmpty(Model.Result))
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="alert alert-info" role="alert">
+                @Model.Result
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                Current Balance: <strong> @Html.DisplayTextFor(x => x.Balance)</strong>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                Add Funds
+            </div>
+            <form asp-action="Balance" asp-controller="User">
+                <div class="form-row px-3">
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(x => x.Amount)
+                        @Html.TextBoxFor(x => x.Amount, new {@class="form-control", @placeholder="Amount"})
+                        @Html.ValidationMessageFor(x => x.Amount)
+                    </div>
+                </div>
+                <div class="form-row px-3">
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(x => x.CardNumber)
+                        @Html.TextBoxFor(x => x.CardNumber, new {@class="form-control", @placeholder="Card Number"})
+                        @Html.ValidationMessageFor(x => x.CardNumber)
+                    </div>
+                </div>
+                <div class="form-row px-3">
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(x => x.Expiration)
+                        @Html.TextBoxFor(x => x.Expiration, new {@class="form-control", @placeholder="Expiration"})
+                        @Html.ValidationMessageFor(x => x.Expiration)
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(x => x.Cvv)
+                        @Html.PasswordFor(x => x.Cvv, new {@class="form-control", @placeholder="CVV"})
+                        @Html.ValidationMessageFor(x => x.Cvv)
+                    </div>
+                </div>
+                <div class="form-row px-3">
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(x => x.Name)
+                        @Html.TextBoxFor(x => x.Name, new {@class="form-control", @placeholder="Name On Card"})
+                        @Html.ValidationMessageFor(x => x.Name)
+                    </div>
+                </div>
+                <div class="form-row px-3">
+                    <div class="form-group col-sm-12">
+                        <input type="submit" class="btn btn-primary" value="Add" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/balance.js"></script>

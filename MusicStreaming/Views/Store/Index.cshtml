@@ -1,0 +1,43 @@
+﻿@using MusicStreaming.Models.ViewModel
+@{
+    ViewData["Title"] = "Store";
+}
+@model StoreView
+<div class="row">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Song</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+               @for (var i = 0; i < Model.SongItems.Count; i++)
+                {
+                    var item = Model.SongItems[i];
+                    <tr>
+                        <th scope="row">@(i + 1)</th>
+                        <td>@item.SongName</td>
+                        <td>
+                            @if (!item.IsOrdered)
+                            {
+                                <input type="button" class="btn btn-primary" value="Buy" onclick="javascript: buy('@item.SongId')"/>
+                            }
+                            @if (item.IsOrdered)
+                            {
+                                @if (item.IsRefundAvailable)
+                                {
+                                    <input type="button" class="btn btn-danger" value="Refund" onclick="javascript: refund('@item.SongId')"/>
+                                }
+                                @Html.ActionLink("Rate Purchase", "Index", "Rate")
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/js/store.js"></script>
